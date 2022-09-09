@@ -1,0 +1,32 @@
+<%-- 
+    Document   : Acceuil
+    Created on : 27 mai 2022, 15:14:26
+    Author     : P14A-01-Faneva
+--%>
+<%@page import="DAO.*" %>
+<%
+    Connecte connecte=new Connecte();
+    if(!connecte.hasConnecte())
+    {
+        response.sendRedirect("Login.jsp");
+    }
+    Service.client.Film film=new Service.client.Film();
+    Categorie categorie=new Categorie();
+%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Categorie - Action</title>
+        <link rel="stylesheet" href="/Servlet/assets/css/Bootstrap.css">
+    </head>
+    <body>
+        <h1>Hello 
+        <% out.println(connecte.getNomClientConnecte());%></h1>
+            <%
+                out.println(film.listeFilm((Integer.parseInt(request.getParameter("id")))));
+            %>
+        <a href="Deconnecter?nom=<% out.println(connecte.getNomClientConnecte());%>"><button>Se deconnecter</button></a>
+    </body>
+</html>
